@@ -42,6 +42,8 @@ boolean emoncmsPost(void);
 boolean jeedomPost(void);
 boolean httpRequest(void);
 boolean UPD_switch(void);
+boolean UPD_ADPS(void);
+boolean UPD_INTENSITY(void);
 String  build_emoncms_json(void);
 
 #endif

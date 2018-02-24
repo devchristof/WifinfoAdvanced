@@ -216,7 +216,10 @@ void showConfig()
   DebugF("port     :"); Debugln(config.httpReq.port); 
   DebugF("path     :"); Debugln(config.httpReq.path); 
   DebugF("freq     :"); Debugln(config.httpReq.freq); 
-  DebugF("sw idx   :"); Debugln(config.httpReq.swidx); 
+  DebugF("sw idx   :"); Debugln(config.httpReq.swidx);
+  DebugF("adps idx   :"); Debugln(config.httpReq.adpsidx);
+  DebugF("intensity idx   :"); Debugln(config.httpReq.iidx);
+     
   delay(1000);
 }
 

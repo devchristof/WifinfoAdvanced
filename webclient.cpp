@@ -22,6 +22,8 @@
 
 #include "webclient.h"
 
+char * Intensite;
+
 /* ======================================================================
 Function: httpPost
 Purpose : Do a http post
@@ -347,6 +349,7 @@ boolean httpRequest(void)
 		      if (valName == "IINST")
           {
             url.replace("%IINST%", me->value);
+            Intensite = me->value;
           }
 		      if (valName == "IMAX")
           {
@@ -372,6 +375,54 @@ boolean httpRequest(void)
   } // if host
   return ret;
 }
+
+#ifdef ADPS
+boolean UPD_ADPS(void)
+{
+  boolean ret = false;
+
+  // Some basic checking
+  if (*config.httpReq.host && (config.httpReq.adpsidx != 0) )
+  {   
+      char Status[5];
+      char url[128]; 
+      uint16_t port = config.httpReq.port;
+
+      if(port == 0)
+        port = 80;
+
+      sprintf(url,"/json.htm?type=command&param=udevice&idx=%d&nvalue=4&svalue=%s",(int)config.httpReq.adpsidx, Status);
+      //Debugf("Envoie ADPS: <%s>\n",  url );
+      ret = httpPost( config.httpReq.host, port, url) ;
+   
+  } // if host & idx
+  return ret;
+}
+#endif
+
+#ifdef INTENSITY
+boolean UPD_INTENSITY(void)
+{
+  boolean ret = false;
+
+  // Some basic checking
+  if (*config.httpReq.host && (config.httpReq.iidx != 0) )
+  {   
+      
+      char url[128]; 
+      uint16_t port = config.httpReq.port;
+
+      if(port == 0)
+        port = 80;
+
+      sprintf(url,"/json.htm?type=command&param=udevicet&idx=%d&nvalue=0&svalue=%s",(int)config.httpReq.iidx, Intensite);
+      //Debugf("Envoie Intensite: <%s>\n",  url );
+      ret = httpPost( config.httpReq.host, port, url) ;
+   
+  } // if host & idx
+  return ret;
+}
+#endif
 
 #ifdef SENSOR
 /* ======================================================================

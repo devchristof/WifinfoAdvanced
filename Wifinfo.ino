@@ -101,6 +101,9 @@ volatile boolean task_emoncms = false;
 volatile boolean task_jeedom = false;
 volatile boolean task_httpRequest = false;
 volatile boolean task_updsw = false;
+volatile boolean task_updadps = false;
+volatile boolean task_updintensity = false;
+
 unsigned long seconds = 0;
 char buff[132];   //To format debug strings
 // sysinfo data
@@ -432,7 +435,9 @@ void ADPSCallback(uint8_t phase)
   // Monophasé
   if (phase == 0 ) {
     Debugln(F("ADPS"));
+    task_updadps= true;
   } else {
+    task_updadps= false;
     Debug(F("ADPS Phase "));
     Debugln('0' + phase);
   }
@@ -1153,13 +1158,20 @@ void loop()
     jeedomPost();  
     task_jeedom=false;
   } else if (task_httpRequest) { 
-    httpRequest();  
+    httpRequest();
+    UPD_INTESITY();
     task_httpRequest=false;
   } 
 #ifdef SENSOR
   else if (task_updsw) { 
     UPD_switch();  
     task_updsw=false;
+  }
+  
+#ifdef ADPS
+  else if (task_updadps) { 
+    UPD_ADPS();  
+    task_updadps=false;
   }
 
  // read the state of the switch into a local variable:

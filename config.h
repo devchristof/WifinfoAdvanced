@@ -93,6 +93,8 @@
 #define CFG_FORM_HTTPREQ_PATH  FPSTR("httpreq_path")
 #define CFG_FORM_HTTPREQ_FREQ  FPSTR("httpreq_freq")
 #define CFG_FORM_HTTPREQ_SWIDX FPSTR("httpreq_swidx")
+#define CFG_FORM_HTTPREQ_SWIDX FPSTR("httpreq_adpsidx")
+#define CFG_FORM_HTTPREQ_SWIDX FPSTR("httpreq_iidx")
 
 #define CFG_FORM_IP  FPSTR("wifi_ip");
 #define CFG_FORM_GW  FPSTR("wifi_gw");

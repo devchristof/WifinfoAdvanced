@@ -46,6 +46,9 @@ extern "C" {
 #include "webclient.h"
 #include "config.h"
 
+// Envoie Alerte ADPS
+//#define ADPS
+
 // Décommenter SIMU pour compiler une version de test
 //  pour un module non connecté au compteur EDF (simule un ADCO et une valeur HCHC)
 // Le port Serial sera alors utilisé pour le DEBUG (accessible via USB pour l'IDE)
@@ -60,7 +63,6 @@ extern "C" {
 // Décommenter SYSLOG pour une version capable d'envoyer du Debug
 //  vers un serveur rsyslog du réseau
 #define SYSLOG
-
 //Décommenter SENSOR pour compiler une  version capable de gérer
 //  un contact sec connecté entre Ground et D5 (GPIO-14)
 #define SENSOR
